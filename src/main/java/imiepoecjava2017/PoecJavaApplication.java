@@ -11,97 +11,178 @@ import java.util.Scanner;
  */
 public class PoecJavaApplication {
 
-	// Java : déclaration d'une constante
-	public final static int TAILLE_J1 = 10;
+	public final static int PLAYER_ATTRIBUTS = 5;
+	public final static int PLAYER_PV = 0;
+	public final static int PLAYER_ARMOR = 1;
+	public final static int PLAYER_PA = 2;
+	public final static int PLAYER_WEAPON_COST = 3;
+	public final static int PLAYER_WEAPON_DAMAGE = 4;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		// Java : création d'un tableau à une dimension
-		int[] joueur1 = new int[TAILLE_J1];
-		int joueur2[][] = new int[20][10];
+		// int[][] weapons = new int[5][2];
+		// int[] armors = new int[3];
+		int[][] weapons = { { 3, 4 }, { 2, 1 }, { 10, 6 }, { 1, 1 }, { 6, 3 } };
+		int[] armors = { 1, 2, 4 };
+		int nbPlayer = 0;
+		int userSelection;
+		int[][] players;
 
-		//int[] joueur3 = {0,5,10,6};
+		// Initialisation du scanner
+		Scanner scan = new Scanner(System.in);
 
-		// Java : création d'un tableau multidimensionnel
-		//int[][][][][][][][][][][][][] joueurX = new int[2][2][2][2][2][2][2][2][2][2][2][2][2];
-		//int[][] joueur2D = {{1,10,6,4},{3},{2,6,9}}; // = int[3][4]
+		players = InitGame(weapons, armors, scan);
 
-		// Algo : POUR => for
-		for (int i = 0; i < joueur1.length; i++) {
-			joueur1[i] = i;
-		}
-
-		// Java : i++ => i = i + 1
-		for (int i = 0; i < joueur1.length; i++) {
-			// Java : affichage sur une ligne
-			System.out.print(joueur1[i]);
-		}
-
-		// Java : retour à la ligne
-		System.out.println();
-
-		// Java : i-- => i = i - 1
-		for (int i = joueur1.length-1; i >= 0 ; i--) {
-			// Java : affichage sur une ligne
-			System.out.print(joueur1[i]);
-		}
-
-		System.out.println();
-		System.out.println(joueur1);
-		System.out.println();
-
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 10; j++) {
-				joueur2[i][j] = i*j;
-				System.out.print(joueur2[i][j] + " ");
+		// Show game board
+		for (int i = 0; i < players.length; i++) {
+			for (int j = 0; j < PLAYER_ATTRIBUTS; j++) {
+				System.out.print(players[i][j] + " ");
 			}
 			System.out.println();
 		}
 
+		PlayGame(players);
+
+		// Fermeture du scanner
+		scan.close();
+	}
+
+	/**
+	 *
+	 * @param players
+	 */
+	private static void PlayGame(int[][] players) {
 		boolean flag = true;
-		int k = 0;
+		int round = 0;
 
-		// Algo : TANTQUE => while
-		while(flag){
-			System.out.println("Coucou " + k);
-			if (k == 10) {
-				flag = false;
+		// Je continu tant qu'un joueur n'a pas gagné
+		while (flag) {
+			round++;
+			System.out.println("New round :" + round);
+
+			// Les joueurs joue chacun leur tour dans l'ordre
+			for (int i = 0; i < players.length; i++) {
+				System.out.println("Player " + (i + 1) + " turn");
+				int tempPA = players[i][PLAYER_PA] - 1;
+
+				// Je joue si je suis vivant et que je peux tapper
+				while (((tempPA - players[i][PLAYER_WEAPON_COST]) >= 0) && players[i][PLAYER_PV]>0) {
+					tempPA -= players[i][PLAYER_WEAPON_COST];
+
+					// Recherche d'un ennemis
+					int ennemi = i;
+					do {
+						ennemi++;
+						if (ennemi >= players.length) {
+							ennemi = 0;
+						}
+					} while (players[ennemi][PLAYER_PV] <= 0 && ennemi != i);
+
+					if (ennemi == i) {
+						System.out.println("End of game, player " + (i + 1)
+								+ " wins.");
+						// Prépare le jeu à être arrêté
+						flag = false;
+						// Force la sortie de la boucle courante
+						break;
+					} else {
+						if (players[i][PLAYER_WEAPON_DAMAGE]
+								- players[ennemi][PLAYER_ARMOR] >= 0) {
+
+							players[ennemi][PLAYER_PV] = players[ennemi][PLAYER_PV]
+									- (-players[ennemi][PLAYER_ARMOR] + players[i][PLAYER_WEAPON_DAMAGE]);
+
+							System.out.println("Player " + (i + 1)
+									+ " hurt player " + (ennemi + 1) + " for "
+									+ players[i][PLAYER_WEAPON_DAMAGE]
+									+ " damages");
+							System.out.println("Player " + (ennemi + 1)
+									+ " have now " + players[ennemi][PLAYER_PV]
+									+ " PV");
+						} else {
+							System.out.println("Player " + (i + 1)
+									+ " is to weak to deal with player "
+									+ (ennemi + 1));
+						}
+					}
+				}
 			}
+		}
+	}
 
-			k = k + 1; // => k++
+	/**
+	 * @param weapons
+	 * @param armors
+	 * @param scan
+	 */
+	private static int[][] InitGame(int[][] weapons, int[] armors, Scanner scan) {
+		int nbPlayer;
+		int userSelection;
+		int[][] players;
+
+		// Affichage selection nbJoueur
+		nbPlayer = CallIntMessage(scan, 2, 20,
+				"How many players (min 2/ max 20)?");
+		players = new int[nbPlayer][PLAYER_ATTRIBUTS];
+
+		// Affichage des infos pour l'ensemble des joueurs
+		for (int i = 0; i < nbPlayer; i++) {
+			// Affichage selection arme
+			userSelection = CallIntMessage(scan, 1, 5,
+					"Please select a weapon for player " + (i + 1)
+							+ " between theirs:\n" + "1) Concasseur \n"
+							+ "2) Pelle \n" + "3) Gatling \n"
+							+ "4) Batte de cricket \n" + "5) Blaster \n ");
+
+			players[i][PLAYER_WEAPON_COST] = weapons[userSelection - 1][1];
+			players[i][PLAYER_WEAPON_DAMAGE] = weapons[userSelection - 1][0];
+
+			// Affichage selection armure
+			userSelection = CallIntMessage(scan, 1, 3,
+					"Please select a armor for player " + (i + 1)
+							+ " between theirs:\n" + "1) Gilet bleu \n"
+							+ "2) Armure de cuir \n" + "3) Armure de plaque \n");
+
+			players[i][PLAYER_ARMOR] = armors[userSelection - 1];
+
+			// Affichage selection attribut
+			// PV
+			userSelection = CallIntMessage(scan, 1, 100, "Life for player "
+					+ (i + 1));
+			players[i][PLAYER_PV] = userSelection;
+
+			// PA
+			userSelection = CallIntMessage(scan, 1, 100,
+					"Action point for player " + (i + 1));
+			players[i][PLAYER_PA] = userSelection;
 		}
 
-		k = 0;
-		flag = true;
+		return players;
+	}
 
-		// Algo  : FAIRE TANQUE => do while
+	/**
+	 * Get only int value if between desired interval Ever print message
+	 *
+	 * @param valMin
+	 * @param valMax
+	 * @param message
+	 * @return
+	 */
+	public static int CallIntMessage(Scanner scan, int valMin, int valMax,
+			String message) {
+
+		int result;
+
 		do {
-			System.out.println("Coucou2 " + k);
-			if (k == 10) {
-				flag = false;
-			}
+			System.out.println(message);
+			while (!scan.hasNextInt())
+				scan.next();
+			result = scan.nextInt();
+		} while (result > valMax || result < valMin);
 
-			k = k + 1; // => k++
-		} while (flag);
-
-		// Algo : SELON => switch
-		switch (k) {
-			case 10:
-				System.out.println("k10 = " + k);
-				break;
-			case 9:
-				System.out.println("k9 = " + k);
-				break;
-			case 8:
-				System.out.println("k8 = " + k);
-				break;
-
-			default:
-				System.out.println("k = " + k);
-				break;
-		}
+		return result;
 	}
 }
