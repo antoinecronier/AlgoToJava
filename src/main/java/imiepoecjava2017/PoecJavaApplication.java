@@ -3,7 +3,6 @@
  */
 package imiepoecjava2017;
 
-// Java : Permet d'avoir accès à l'objet Scanner
 import java.util.Scanner;
 
 /**
@@ -12,57 +11,97 @@ import java.util.Scanner;
  */
 public class PoecJavaApplication {
 
-	// ";" instruction de fin de ligne
-
-	// Algo : déclaration variable entière
-	// ENTIER : nomVAr => int nomVar
-
-	// Algo : correspond à la déclaration des variables d'un algorithme
-	// en JAVA doit être noté comme static car utilisé dans une fonction static
-	//	static int jasmine = 7;
-	//	static int aladin = 5;
-	//	static int panierCommun = jasmine + aladin;
+	// Java : déclaration d'une constante
+	public final static int TAILLE_J1 = 10;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		int nb1;
-		int nb2;
+		// Java : création d'un tableau à une dimension
+		int[] joueur1 = new int[TAILLE_J1];
+		int joueur2[][] = new int[20][10];
 
-		// Algo : création de Lire
-		Scanner lire = new Scanner(System.in);
+		//int[] joueur3 = {0,5,10,6};
 
-		System.out.println("Saisir valeur pour nb1");
-		// Java : récupération de l'entier (int) saisi
-		nb1 = lire.nextInt();
+		// Java : création d'un tableau multidimensionnel
+		//int[][][][][][][][][][][][][] joueurX = new int[2][2][2][2][2][2][2][2][2][2][2][2][2];
+		//int[][] joueur2D = {{1,10,6,4},{3},{2,6,9}}; // = int[3][4]
 
-		System.out.println("Saisir valeur pour nb2");
-		// Java : récupération de l'entier (int) saisi
-		nb2 = lire.nextInt();
+		// Algo : POUR => for
+		for (int i = 0; i < joueur1.length; i++) {
+			joueur1[i] = i;
+		}
 
-		// Java : ferme le scanner
-		lire.close();
+		// Java : i++ => i = i + 1
+		for (int i = 0; i < joueur1.length; i++) {
+			// Java : affichage sur une ligne
+			System.out.print(joueur1[i]);
+		}
 
-		// Test conditionnel :
-		// OU : ||
-		// ET : &&
-		// NON() : !()
-		// égale : ==
+		// Java : retour à la ligne
+		System.out.println();
 
-		// Algo : SI ALORS FINSI => if(){}
-		if (nb1 == nb2) {
-			System.out.println("Egalite nb1 et nb2 : " + (nb1 + nb2));
-		}else if(nb1 < 0 && nb2 > 0){
-			System.out.println(nb1 * nb2);
-		}else if(
-				(nb1 > 0 && nb2 > 0) || (nb1 < 0 && nb2 < 0) &&
-				(nb1 > 10 || nb2 > 10 || nb1 < -10 || nb2 < -10)
-				){
-			System.out.println(nb1 / nb2);
-		}else{
-			System.out.println("non testé");
+		// Java : i-- => i = i - 1
+		for (int i = joueur1.length-1; i >= 0 ; i--) {
+			// Java : affichage sur une ligne
+			System.out.print(joueur1[i]);
+		}
+
+		System.out.println();
+		System.out.println(joueur1);
+		System.out.println();
+
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 10; j++) {
+				joueur2[i][j] = i*j;
+				System.out.print(joueur2[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		boolean flag = true;
+		int k = 0;
+
+		// Algo : TANTQUE => while
+		while(flag){
+			System.out.println("Coucou " + k);
+			if (k == 10) {
+				flag = false;
+			}
+
+			k = k + 1; // => k++
+		}
+
+		k = 0;
+		flag = true;
+
+		// Algo  : FAIRE TANQUE => do while
+		do {
+			System.out.println("Coucou2 " + k);
+			if (k == 10) {
+				flag = false;
+			}
+
+			k = k + 1; // => k++
+		} while (flag);
+
+		// Algo : SELON => switch
+		switch (k) {
+			case 10:
+				System.out.println("k10 = " + k);
+				break;
+			case 9:
+				System.out.println("k9 = " + k);
+				break;
+			case 8:
+				System.out.println("k8 = " + k);
+				break;
+
+			default:
+				System.out.println("k = " + k);
+				break;
 		}
 	}
 }
