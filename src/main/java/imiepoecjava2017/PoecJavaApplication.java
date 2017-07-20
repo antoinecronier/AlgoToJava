@@ -27,8 +27,7 @@ public class PoecJavaApplication {
 		// int[] armors = new int[3];
 		int[][] weapons = { { 3, 4 }, { 2, 1 }, { 10, 6 }, { 1, 1 }, { 6, 3 } };
 		int[] armors = { 1, 2, 4 };
-		int nbPlayer = 0;
-		int userSelection;
+
 		int[][] players;
 
 		// Initialisation du scanner
@@ -51,7 +50,7 @@ public class PoecJavaApplication {
 	}
 
 	/**
-	 *
+	 * Play the game
 	 * @param players
 	 */
 	private static void PlayGame(int[][] players) {
@@ -61,7 +60,7 @@ public class PoecJavaApplication {
 		// Je continu tant qu'un joueur n'a pas gagné
 		while (flag) {
 			round++;
-			System.out.println("New round :" + round);
+			System.out.println("New round : " + round);
 
 			// Les joueurs joue chacun leur tour dans l'ordre
 			for (int i = 0; i < players.length; i++) {
@@ -69,7 +68,7 @@ public class PoecJavaApplication {
 				int tempPA = players[i][PLAYER_PA] - 1;
 
 				// Je joue si je suis vivant et que je peux tapper
-				while (((tempPA - players[i][PLAYER_WEAPON_COST]) >= 0) && players[i][PLAYER_PV]>0) {
+				while (((tempPA - players[i][PLAYER_WEAPON_COST]) >= 0) && players[i][PLAYER_PV]>0 ) {
 					tempPA -= players[i][PLAYER_WEAPON_COST];
 
 					// Recherche d'un ennemis
@@ -126,6 +125,7 @@ public class PoecJavaApplication {
 		// Affichage selection nbJoueur
 		nbPlayer = CallIntMessage(scan, 2, 20,
 				"How many players (min 2/ max 20)?");
+
 		players = new int[nbPlayer][PLAYER_ATTRIBUTS];
 
 		// Affichage des infos pour l'ensemble des joueurs
@@ -133,9 +133,12 @@ public class PoecJavaApplication {
 			// Affichage selection arme
 			userSelection = CallIntMessage(scan, 1, 5,
 					"Please select a weapon for player " + (i + 1)
-							+ " between theirs:\n" + "1) Concasseur \n"
-							+ "2) Pelle \n" + "3) Gatling \n"
-							+ "4) Batte de cricket \n" + "5) Blaster \n ");
+							+ " between theirs:\n"
+							+ "1) Concasseur \n"
+							+ "2) Pelle \n"
+							+ "3) Gatling \n"
+							+ "4) Batte de cricket \n"
+							+ "5) Blaster \n ");
 
 			players[i][PLAYER_WEAPON_COST] = weapons[userSelection - 1][1];
 			players[i][PLAYER_WEAPON_DAMAGE] = weapons[userSelection - 1][0];
@@ -178,8 +181,8 @@ public class PoecJavaApplication {
 
 		do {
 			System.out.println(message);
-			while (!scan.hasNextInt())
-				scan.next();
+			while (!scan.hasNextInt())scan.next();
+
 			result = scan.nextInt();
 		} while (result > valMax || result < valMin);
 
