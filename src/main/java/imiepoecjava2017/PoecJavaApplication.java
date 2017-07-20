@@ -3,6 +3,9 @@
  */
 package imiepoecjava2017;
 
+// Java : Permet d'avoir accès à l'objet Scanner
+import java.util.Scanner;
+
 /**
  * @author tactfactory
  *
@@ -30,6 +33,22 @@ public class PoecJavaApplication {
 		int jasmine = 7;
 		int aladin = 5;
 		int panierCommun = jasmine + aladin;
+
+		// Algo : création de Lire
+		Scanner lire = new Scanner(System.in);
+
+		System.out.println("Saisir valeur pour jasmine");
+		// Java : récupération de l'entier (int) saisi
+		jasmine = lire.nextInt();
+
+		System.out.println("Saisir valeur pour aladin");
+		// Java : récupération de l'entier (int) saisi
+		aladin = lire.nextInt();
+
+		// Java : ferme le scanner
+		lire.close();
+
+		panierCommun = jasmine + aladin;
 
 		// Algo : Ecrire
 		System.out.println(panierCommun);
