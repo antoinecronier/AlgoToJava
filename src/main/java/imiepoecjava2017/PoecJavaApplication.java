@@ -28,30 +28,41 @@ public class PoecJavaApplication {
 	 */
 	public static void main(String[] args) {
 
-		// Algo : alternative à la déclaration static, correspond à une déclaration de variable
-		// dans la fonction
-		int jasmine = 7;
-		int aladin = 5;
-		int panierCommun = jasmine + aladin;
+		int nb1;
+		int nb2;
 
 		// Algo : création de Lire
 		Scanner lire = new Scanner(System.in);
 
-		System.out.println("Saisir valeur pour jasmine");
+		System.out.println("Saisir valeur pour nb1");
 		// Java : récupération de l'entier (int) saisi
-		jasmine = lire.nextInt();
+		nb1 = lire.nextInt();
 
-		System.out.println("Saisir valeur pour aladin");
+		System.out.println("Saisir valeur pour nb2");
 		// Java : récupération de l'entier (int) saisi
-		aladin = lire.nextInt();
+		nb2 = lire.nextInt();
 
 		// Java : ferme le scanner
 		lire.close();
 
-		panierCommun = jasmine + aladin;
+		// Test conditionnel :
+		// OU : ||
+		// ET : &&
+		// NON() : !()
+		// égale : ==
 
-		// Algo : Ecrire
-		System.out.println(panierCommun);
+		// Algo : SI ALORS FINSI => if(){}
+		if (nb1 == nb2) {
+			System.out.println("Egalite nb1 et nb2 : " + (nb1 + nb2));
+		}else if(nb1 < 0 && nb2 > 0){
+			System.out.println(nb1 * nb2);
+		}else if(
+				(nb1 > 0 && nb2 > 0) || (nb1 < 0 && nb2 < 0) &&
+				(nb1 > 10 || nb2 > 10 || nb1 < -10 || nb2 < -10)
+				){
+			System.out.println(nb1 / nb2);
+		}else{
+			System.out.println("non testé");
+		}
 	}
-
 }
