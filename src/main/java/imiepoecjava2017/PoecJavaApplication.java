@@ -15,42 +15,66 @@ public class PoecJavaApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String monString = "";
-		monString = "s;vlsdjlksj dlfj sldk;fl jlsdjlf lkdsj fksdftoto tata";
+		String message = "";
+		Integer key = 0;
+		int[] hidenMsg;
+		String readableMsg = "";
 
-		if (monString.equals("toto")) {
+		Scanner sc = new Scanner(System.in);
 
-		}else if (monString.contains("toto")) {
+		System.out.println("Welcome, please insert your message");
+		message = sc.nextLine();
+		key = CallIntMessage(sc, Integer.MIN_VALUE, Integer.MAX_VALUE, "Please enter your key");
 
-		}else if (monString.endsWith("tata")) {
+		hidenMsg = HideMessage(message,key);
 
-		}else if (monString.startsWith("s;")) {
+		System.out.println();
+		for (int i = 0; i < hidenMsg.length; i++) {
+			System.out.print(hidenMsg[i] + " ");
+		}
+		System.out.println();
 
-		}else if (monString.isEmpty()) {
+		readableMsg = ShowMessage(hidenMsg,key);
 
-		}else if (monString == null) {
+		System.out.println(readableMsg);
+	}
 
-		}else if (monString.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) {
+	/**
+	 * Decrypt message from int[] and key
+	 * @param hidenMsg
+	 * @param key
+	 * @return
+	 */
+	private static String ShowMessage(int[] hidenMsg, Integer key) {
+		String result = "";
 
-		}else if (monString.length() ==  0) {
-
-		}else if (monString.charAt(0) == 'O') {
-
-		}else if (monString.trim().equals("")) {
-
-		}else if (monString.replace(" - ", "").equals("")) {
-
-		}else if (monString.replaceAll(" - ", "").equals("")) {
-
-		}else if (monString.indexOf("toto") == 1) {
-
-		}else if (monString.split(";")[0].equals("s")) {
-
-		}else if (monString.substring(5, 8).equals("")) {
-
+		for (int item : hidenMsg) {
+			for (int i = 0; i < 10000000; i++) {
+				if ((i*i-i+key) == item) {
+					result += (char)i;
+				}
+			}
 		}
 
-		monString.substring(monString.indexOf("toto"), monString.indexOf("tata")+3).length();
+		return result;
+	}
+
+	/***
+	 * Hide current posted message with formula ascii^2 - ascii + key
+	 * @param message
+	 * @param key
+	 * @return
+	 */
+	private static int[] HideMessage(String message, Integer key) {
+		int[] result = new int[message.length()];
+
+		char[] charMsg = message.toCharArray();
+
+		for (int i = 0; i < message.length(); i++) {
+			result[i] = ((int)charMsg[i]) * ((int)charMsg[i]) - ((int)charMsg[i]) + key;
+		}
+
+		return result;
 	}
 
 	/**
@@ -72,6 +96,23 @@ public class PoecJavaApplication {
 
 			result = scan.nextInt();
 		} while (result > valMax || result < valMin);
+
+		return result;
+	}
+
+	public static String CallStringMessage(Scanner scan, String[] acceptable, String message){
+		String result;
+		boolean isNOK = true;
+
+		do {
+			System.out.println(message);
+			result = scan.next();
+			for (String string : acceptable) {
+				if (result.equals(string)) {
+					isNOK = false;
+				}
+			}
+		} while (isNOK);
 
 		return result;
 	}
