@@ -3,6 +3,7 @@
  */
 package imiepoecjava2017;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +12,7 @@ import imiepoecjava2017.entities.Role;
 import imiepoecjava2017.entities.User;
 import imiepoecjava2017.utils.asciiart.AsciiArtCommandPrompt;
 import imiepoecjava2017.utils.asciiart.AsciiArtMode;
+import imiepoecjava2017.utils.file.FromFile;
 import imiepoecjava2017.utils.introspection.DumpFields;
 
 public class PoecJavaApplication {
@@ -52,7 +54,17 @@ public class PoecJavaApplication {
 
 		ArrayList<String> listField = DumpFields.inspectBaseAttribut(User.class, Object.class);
 		for (String string : listField) {
-			//System.out.println(string);
+			AsciiArtCommandPrompt.getInstance().print(string);
+		}
+
+		ArrayList<Method> methods = DumpFields.getSetter(User.class);
+		for (Method method : methods) {
+			System.out.println(method.getName());
+		}
+
+		FromFile ff = new FromFile("C:\\Users\\tactfactory\\workspaceLuna\\IMIE-POEC-JAVA-2017\\.gitignore");
+		for (String string : ff.getList()) {
+			System.out.println(string);
 		}
 	}
 }
