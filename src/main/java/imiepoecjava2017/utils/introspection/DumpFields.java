@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class DumpFields {
-	public static <T> ArrayList<String> inspectBaseAttribut(Class<T> klazz, Class<T> classLimiter) {
+	public static ArrayList<String> inspectBaseAttribut(Class klazz, Class classLimiter) {
 		ArrayList<String> attributs = new ArrayList<String>();
 		Field[] fields;
 		Class superClass = klazz;
@@ -164,6 +166,46 @@ public class DumpFields {
 			// and this, too
 			return Collections.emptyMap();
 		}
+	}
+
+	public static Map<String, Object> fielderWithList(Object o){
+		Map<String,Object> result = new HashMap<String, Object>();
+
+		Map<String,Object>objectDump = DumpFields.fielder(o);
+		for (Entry<String, Object> item : objectDump.entrySet()) {
+			if (item.getValue().getClass().isAssignableFrom(ArrayList.class)) {
+				SubFielder(result, item);
+			}else{
+				result.put(item.getKey(), item.getValue());
+			}
+		}
+
+		return result;
+	}
+
+	private static void SubFielder(Map<String, Object> result,
+			Entry<String, Object> item) {
+		Map<String, Object> subResult = new HashMap<String, Object>();
+
+		result.put(item.getKey(), " :");
+
+		Class klazz = item.getValue().getClass();
+
+		int i = 0;
+
+		for (Object object : ((Iterable) item.getValue())) {
+			Map<String,Object>subDump = DumpFields.fielderWithList(object);
+			for (Entry<String, Object> subItem : subDump.entrySet()) {
+				if (subItem.getValue().getClass().isAssignableFrom(ArrayList.class)) {
+					SubFielder(subResult, subItem);
+				}else{
+					subResult.put(subItem.getKey()+"["+i+"]", subItem.getValue());
+				}
+			}
+			i++;
+		}
+
+		result.put(item.getKey(), subResult);
 	}
 
 	public static <T> ArrayList<Map<String, Object>> listFielder(List<T> items) {
