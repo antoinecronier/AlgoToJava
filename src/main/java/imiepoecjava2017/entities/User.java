@@ -2,13 +2,13 @@ package imiepoecjava2017.entities;
 
 import java.util.ArrayList;
 
-public class User {
+public abstract class User {
 	private int id;
 	private String lastname;
 	private String firstname;
 	private String login;
 	private String password;
-	private ArrayList<Role> roles;
+	private Role role;
 
 	/**
 	 * @return the id
@@ -70,25 +70,15 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	/**
-	 * @return the roles
+	 * @return the role
 	 */
-	public ArrayList<Role> getRoles() {
-		return roles;
-	}
-	/**
-	 * @param roles the roles to set
-	 */
-	public void setRoles(ArrayList<Role> roles) {
-		this.roles = roles;
+	public Role getRole() {
+		return this.role;
 	}
 
-	public String returnSomething(){
-		return returnSomething("something");
-	}
-
-	public String returnSomething(String sm){
-		return sm;
+	public User(Role role) {
+		super();
+		this.role = role;
 	}
 }
