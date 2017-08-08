@@ -92,7 +92,7 @@ public class PoecJavaApplication {
 
 				for (int i = 0; i < height; i++) {
 					String sub = "";
-					for (int j = 0; j < width; j++) {
+					for (int j = 0; j < width * 27; j++) {
 						int result = 0;
 						Random rand = new Random();
 						int max = 128;
