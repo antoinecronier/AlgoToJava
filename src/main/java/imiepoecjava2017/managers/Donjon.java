@@ -32,42 +32,25 @@ public class Donjon {
 		}else{
 			System.out.println("Les monstres gagnent");
 		}
+
+		System.out.println(heros);
+		System.out.println(monsters);
 	}
 
 	private LivingCharacter fight(LivingCharacter fighter1,
 			LivingCharacter fighter2) {
 
 		while (fighter1.getPv() > 0 && fighter2.getPv() > 0) {
-			fightTurn(fighter1, fighter2);
+			fighter1.fight(fighter1,fighter2);
 			if (fighter2.getPv() > 0) {
-				fightTurn(fighter2, fighter1);
+				fighter2.fight(fighter2,fighter1);
 			}
 		}
 
-		if (fighter1.getPv() < 0) {
+		if (fighter1.getPv() <= 0) {
 			return fighter1;
 		}else{
 			return fighter2;
-		}
-	}
-
-	private void fightTurn(LivingCharacter fighter1, LivingCharacter fighter2) {
-		int pa = fighter1.getPa();
-		while (pa - fighter1.getWeapon().getActionPoint() > 0) {
-			pa -= fighter1.getWeapon().getActionPoint();
-			if (fighter1.getWeapon().getDamage()
-					- fighter2.getArmor().getDefence() > 0) {
-				fighter2.setPv(fighter2.getPv()
-						- (fighter1.getWeapon().getDamage() - fighter2
-								.getArmor().getDefence()));
-				System.out.println("Le combatant " + fighter1.getName() + " arrache la tronche de " + fighter2.getName() + " pour " + (fighter1.getWeapon().getDamage() - fighter2
-								.getArmor().getDefence() + " degat"));
-				if (fighter2.getPv() <= 0) {
-					return;
-				}
-			}else{
-				System.out.println("Le combatant " + fighter1.getName() + " n'arrive a rien face a " + fighter2.getName());
-			}
 		}
 	}
 }

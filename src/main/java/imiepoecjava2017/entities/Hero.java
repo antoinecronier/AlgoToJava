@@ -2,7 +2,7 @@ package imiepoecjava2017.entities;
 
 import java.util.ArrayList;
 
-public class Hero extends LivingCharacter {
+public abstract class Hero extends LivingCharacter {
 	private ArrayList<Item> stuff;
 
 	/**
@@ -25,5 +25,16 @@ public class Hero extends LivingCharacter {
 
 	public Hero(String name, int pv, int pa, Weapon weapon, Armor armor) {
 		super(name, pv, pa, weapon, armor);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Hero [stuff=" + stuff + ", getName()=" + getName()
+				+ ", getPv()=" + getPv() + ", getPa()=" + getPa()
+				//+ ", getWeapon()=" + getWeapon() + ", getArmor()=" + getArmor()
+				+ "]\n";
 	}
 }
