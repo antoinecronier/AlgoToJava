@@ -7,6 +7,7 @@ public abstract class LivingCharacter implements Fighter {
 	private int pa;
 	private Weapon weapon;
 	private Armor armor;
+
 	/**
 	 * @return the name
 	 */
@@ -112,9 +113,9 @@ public abstract class LivingCharacter implements Fighter {
 	@Override
 	public void fightSuccessMessage(LivingCharacter attack,
 			LivingCharacter ennemi) {
-//		System.out.println("Le combatant " + this.getName() + " arrache la tronche de " + ennemi.getName() + " pour " + (this.getWeapon().getDamage() - ennemi
-//				.getArmor().getDefence() + " degat"));
-//		System.out.println("L'ennemi " + ennemi.getName() + " ne possède plus que " + ennemi.getPv() + " pv");
+		System.out.println("Le combatant " + this.getName() + " arrache la tronche de " + ennemi.getName() + " pour " + (this.getWeapon().getDamage() - ennemi
+				.getArmor().getDefence() + " degat"));
+		System.out.println("L'ennemi " + ennemi.getName() + " ne possède plus que " + ennemi.getPv() + " pv");
 	}
 
 	/* (non-Javadoc)
@@ -122,7 +123,7 @@ public abstract class LivingCharacter implements Fighter {
 	 */
 	@Override
 	public void fightLoseMessage(LivingCharacter attack, LivingCharacter ennemi) {
-//		System.out.println("Le combatant " + this.getName() + " n'arrive a rien face a " + ennemi.getName());
-//		System.out.println("L'ennemi " + ennemi.getName() + " a toujours " + ennemi.getPv() + " pv");
+		System.out.println("Le combatant " + this.getName() + " n'arrive a rien face a " + ennemi.getName());
+		System.out.println("L'ennemi " + ennemi.getName() + " a toujours " + ennemi.getPv() + " pv");
 	}
 }
