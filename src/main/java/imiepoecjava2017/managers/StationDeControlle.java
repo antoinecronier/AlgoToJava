@@ -2,6 +2,7 @@ package imiepoecjava2017.managers;
 
 import imiepoecjava2017.entities.Cosmonaute;
 import imiepoecjava2017.entities.Fusee;
+import imiepoecjava2017.entities.GrossePlanet;
 import imiepoecjava2017.entities.Planete;
 
 import java.util.ArrayList;
@@ -60,15 +61,25 @@ public class StationDeControlle {
 	}
 
 	public void prepareNavigue(Fusee fusee, Planete depart, Planete arrive) {
-		fusee.setDepart(depart);
-		fusee.setArrive(arrive);
+
+		if (depart.decolle(fusee) && arrive.atterir(fusee)) {
+			fusee.setDepart(depart);
+			fusee.setArrive(arrive);
+			System.out.println("Destination OK");
+		}else{
+			System.out.println("NOP");
+		}
 	}
 
 	public void naviguer() {
 		for (Fusee fusee : fusees) {
-			System.out.println("La fusee : \"" + fusee.getName() + "\" part de \""
-					+ fusee.getDepart().getName() + "\" pour aller a \"" + fusee.getArrive().getName()
-					+ "\" avec a son bord \n" + fusee.getCosmonautes());
+			if (fusee.getDepart() != null && fusee.getArrive() != null) {
+				System.out.println("La fusee : \"" + fusee.getName() + "\" part de \""
+						+ fusee.getDepart().getName() + "\" pour aller a \"" + fusee.getArrive().getName()
+						+ "\" avec a son bord \n" + fusee.getCosmonautes());
+			}else{
+				System.out.println("La fusee : \"" + fusee.getName()+"\" n'a pas pu voyagé");
+			}
 			System.out.println();
 		}
 	}

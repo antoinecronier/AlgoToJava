@@ -7,7 +7,20 @@ public class Fusee {
 	private ArrayList<Cosmonaute> cosmonautes;
 	private Planete depart;
 	private Planete arrive;
+	private int puissance;
 
+	/**
+	 * @return the puissance
+	 */
+	public int getPuissance() {
+		return puissance;
+	}
+	/**
+	 * @param puissance the puissance to set
+	 */
+	public void setPuissance(int puissance) {
+		this.puissance = puissance;
+	}
 	/**
 	 * @return the name
 	 */
@@ -61,15 +74,17 @@ public class Fusee {
 		this.arrive = arrive;
 	}
 
-	public Fusee(String name, ArrayList<Cosmonaute> cosmonautes) {
+	public Fusee(String name, int puissance, ArrayList<Cosmonaute> cosmonautes) {
 		super();
 		this.name = name;
 		this.cosmonautes = cosmonautes;
+		this.puissance = puissance;
 	}
 
-	public Fusee(String name) {
+	public Fusee(String name, int puissance) {
 		super();
 		this.name = name;
 		this.cosmonautes = new ArrayList<Cosmonaute>();
+		this.puissance = puissance;
 	}
 }
