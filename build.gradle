@@ -86,6 +86,7 @@ task checkstyleMain (type: Checkstyle, overwrite: true) {
     showViolations = false
     source fileTree('src/main/java')
     include '**/*.java'
+    include '**/**/*.java'
     exclude '**/gen/**'
     exclude '**/R.java'
     exclude '**/BuildConfig.java'
@@ -101,6 +102,7 @@ task checkstyleTest (type: Checkstyle, overwrite: true){
     showViolations = false
     source fileTree('src/main/java')
     include '**/*.java'
+    include '**/**/*.java'
     exclude '**/gen/**'
     exclude '**/R.java'
     exclude '**/BuildConfig.java'
@@ -174,7 +176,7 @@ findbugsMain.finalizedBy checkFindBugsReport
 task findbugsMain (type: FindBugs, overwrite: true) {
 	ignoreFailures = true
     description 'Run findbugs'
-    classes = fileTree(classesJava) 
+    classes = fileTree(classesJava)
     source = fileTree(javasRoot)
     classpath = files(classesJava)
 
@@ -191,7 +193,7 @@ task findbugsMain (type: FindBugs, overwrite: true) {
 task findbugsTest (type: FindBugs, overwrite: true) {
 	ignoreFailures = true
     description 'Run findbugs'
-    classes = fileTree(classesJava) 
+    classes = fileTree(classesJava)
     source = fileTree(javasRoot)
     classpath = files(classesJava)
 
@@ -226,7 +228,7 @@ task pmdMain(type: Pmd, overwrite: true) {
     description 'Runs PMD inspection against Android sourcesets.'
     group = 'Code Quality'
     ruleSetFiles = files("${rootProject.rootDir}/pmd_rules.xml")
-    source = fileTree(javasRoot) 
+    source = fileTree(javasRoot)
     include '**/*.java'
     exclude '**/gen/**'
 
@@ -241,7 +243,7 @@ task pmdTest(type: Pmd, overwrite: true) {
     description 'Runs PMD inspection against Android sourcesets.'
     group = 'Code Quality'
     ruleSetFiles = files("${rootProject.rootDir}/pmd_rules.xml")
-    source = fileTree(testJavaRoot) 
+    source = fileTree(testJavaRoot)
     include '**/*.java'
     exclude '**/gen/**'
 
