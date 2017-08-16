@@ -17,7 +17,7 @@ public class Barbarian extends Hero {
 	 */
 	public void setSecondWeapon(Weapon secondWeapon) throws Exception {
 		if (secondWeapon.getType().equals(ItemType.PHYSIC)) {
-			super.setWeapon(secondWeapon);
+			this.secondWeapon = secondWeapon;
 		}else{
 			throw new Exception("Barbarian can only equipe physic weapon");
 		}
