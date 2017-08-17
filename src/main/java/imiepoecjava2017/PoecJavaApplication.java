@@ -3,16 +3,12 @@
  */
 package imiepoecjava2017;
 
-import javax.swing.JFrame;
-
-import imiepoecjava2017.controllers.LoginController;
+import imiepoecjava2017.managers.ViewsManager;
 
 public class PoecJavaApplication {
 
 	public static void main(String[] args) {
 
-		JFrame frame = new JFrame();
-		new LoginController(frame);
-
+		ViewsManager.getInstance().start();
 	}
 }

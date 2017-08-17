@@ -10,31 +10,20 @@ import imiepoecjava2017.entities.Candidate;
 import imiepoecjava2017.entities.User;
 import imiepoecjava2017.views.LoginView;
 
-public class LoginController {
+public class LoginController extends BaseController {
 
-	private JFrame frame;
-	private LoginView view;
 	private User user;
 
 	public LoginController(JFrame frame) {
-		this.frame = frame;
+		super.frame = frame;
 		user = new Candidate();
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					view = new LoginView(LoginController.this.frame);
-					frame.setVisible(true);
-					initEvent();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		super.view = new LoginView(this.frame);
 	}
 
-	private void initEvent() {
+	@Override
+	public void initEvent() {
 
+		LoginView view = (LoginView) super.view;
 		view.getBtnValidate().addActionListener(new ActionListener() {
 
 			@Override

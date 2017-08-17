@@ -5,16 +5,12 @@ import imiepoecjava2017.utils.views.ViewUtils;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class HomeView {
-
-	private JPanel contentPane;
+public class HomeView extends BaseView {
 
 	/**
 	 * Create the frame.
 	 */
 	public HomeView(JFrame frame) {
-		contentPane = new JPanel();
-		ViewUtils.configureJFrame(frame, contentPane);
+		super.contentPane = new JPanel();
 	}
-
 }

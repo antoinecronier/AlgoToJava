@@ -4,17 +4,20 @@ import imiepoecjava2017.utils.views.ViewUtils;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
-public class LoginView {
+public class LoginView extends BaseView {
 
-	private JPanel contentPane;
 	private JTextField loginTextField;
 	private JPasswordField passwordField;
 	private GridBagLayout gridBagLayout;
@@ -22,20 +25,6 @@ public class LoginView {
 	private JLabel lblLoginPage;
 	private JLabel lblPassword;
 	private JButton btnValidate;
-
-	/**
-	 * @return the contentPane
-	 */
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-
-	/**
-	 * @param contentPane the contentPane to set
-	 */
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
-	}
 
 	/**
 	 * @return the passwordField
@@ -121,14 +110,19 @@ public class LoginView {
 		this.btnValidate = btnValidate;
 	}
 
+	public JTextField getLoginTextField() {
+		return loginTextField;
+	}
+
+	public void setLoginTextField(JTextField loginTextField) {
+		this.loginTextField = loginTextField;
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public LoginView(JFrame frame) {
-		contentPane = new JPanel();
-
-		ViewUtils.configureFirstJFrame(frame);
-		ViewUtils.configureJFrame(frame,contentPane);
+		super.contentPane = new JPanel();
 
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{200, 0, 0, 0, 0, 0, 200};
@@ -181,13 +175,4 @@ public class LoginView {
 		gbc_btnValidate.gridy = 8;
 		getContentPane().add(btnValidate, gbc_btnValidate);
 	}
-
-	public JTextField getLoginTextField() {
-		return loginTextField;
-	}
-
-	public void setLoginTextField(JTextField loginTextField) {
-		this.loginTextField = loginTextField;
-	}
-
 }
