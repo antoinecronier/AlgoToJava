@@ -7,6 +7,8 @@ public class Candidate extends User {
 
 	private List<Job> jobs = new ArrayList<Job>();
 	private List<Company> companies = new ArrayList<Company>();
+	private List<Skill> skills = new ArrayList<Skill>();
+
 	/**
 	 * @return the jobs
 	 */
@@ -30,6 +32,18 @@ public class Candidate extends User {
 	 */
 	public void setCompanies(List<Company> companies) {
 		this.companies = companies;
+	}
+	/**
+	 * @return the skills
+	 */
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	/**
+	 * @param skills the skills to set
+	 */
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 
 	public Candidate() {
