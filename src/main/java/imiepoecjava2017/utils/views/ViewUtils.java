@@ -18,6 +18,12 @@ public class ViewUtils {
 	 *
 	 */
 	public static void configureJFrame(JFrame jFrame, JPanel contentPane) {
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		jFrame.setContentPane(contentPane);
+	}
+
+	public static void configureFirstJFrame(JFrame jFrame){
 		int frameWidth = 800;
 		int frameHeight = 600;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -29,8 +35,5 @@ public class ViewUtils {
 
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.setBounds(screenMiddleWidth, screenMiddleHeight, frameWidth, frameHeight);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		jFrame.setContentPane(contentPane);
 	}
 }
