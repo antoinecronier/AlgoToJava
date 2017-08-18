@@ -60,17 +60,19 @@ public class NavigationBar extends BaseView {
 
 		btnNext = new JButton("Next");
 		panel.add(btnNext);
-
-		setupEvents();
 	}
 
 	public void setupEvents() {
 		if (!ViewsManager.getInstance().canBack()) {
 			btnBack.setEnabled(false);
+		}else{
+			btnBack.setEnabled(true);
 		}
 
 		if (!ViewsManager.getInstance().canNext()) {
 			btnNext.setEnabled(false);
+		}else{
+			btnNext.setEnabled(true);
 		}
 
 		backListener = new ActionListener() {

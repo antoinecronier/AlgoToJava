@@ -19,7 +19,7 @@ public class LoginController extends BaseController {
 	public LoginController(JFrame frame) {
 		super.frame = frame;
 		user = new Candidate();
-		super.view = new LoginView(this.frame);
+		super.view = new LoginView();
 	}
 
 	@Override

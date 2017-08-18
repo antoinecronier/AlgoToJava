@@ -121,7 +121,7 @@ public class LoginView extends BaseView {
 	/**
 	 * Create the frame.
 	 */
-	public LoginView(JFrame frame) {
+	public LoginView() {
 		super.pageName = ViewsTerms.LOGINVIEW_PAGE_NAME;
 		super.contentPane = new JPanel();
 

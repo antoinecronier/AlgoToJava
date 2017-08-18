@@ -59,8 +59,10 @@ public class ViewsManager {
 
 		if (haveBack) {
 			haveBack = false;
-			for (int i = currentControllerIndex + 1; i < controllers.size(); i++) {
-				controllers.remove(i);
+			int looper = controllers.size();
+			int toRemove = currentControllerIndex + 1;
+			for (int i = toRemove; i < looper; i++) {
+				controllers.remove(toRemove);
 			}
 		}
 		currentController.onExit();
@@ -112,7 +114,7 @@ public class ViewsManager {
 	}
 
 	public Boolean canNext() {
-		if (controllers.size() < currentControllerIndex + 1) {
+		if (controllers.size() > currentControllerIndex + 1) {
 			return true;
 		} else {
 			return false;

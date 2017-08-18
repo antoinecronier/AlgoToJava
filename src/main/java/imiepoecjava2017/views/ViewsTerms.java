@@ -19,4 +19,7 @@ public class ViewsTerms {
 
 	// NavigationBar terms :
 	public static final String NAVIGATIONBAR_PAGE_NAME = "Navigation bar";
+
+	// ItemDetailsView terms :
+	public static final String ITEMDETAILSVIEW_PAGE_NAME = "Details";
 }
