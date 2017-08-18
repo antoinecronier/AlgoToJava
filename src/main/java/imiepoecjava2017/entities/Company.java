@@ -23,5 +23,6 @@ public class Company extends User {
 
 	public Company() {
 		super(Role.COMPANY);
+		this.jobs = new ArrayList<Job>();
 	}
 }

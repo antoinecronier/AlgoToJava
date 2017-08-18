@@ -3,7 +3,6 @@ package imiepoecjava2017.views;
 import imiepoecjava2017.entities.User;
 import imiepoecjava2017.views.usercontrols.MenuBar;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
@@ -16,6 +15,7 @@ import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JLabel;
 
 public class HomeView extends BaseView {
 
@@ -24,6 +24,21 @@ public class HomeView extends BaseView {
 	private JButton btnBtnvalidate;
 	private JButton btnBtnrefresh;
 	private JList<User> userList;
+	private JLabel lblLbluser;
+
+	/**
+	 * @return the lblLbluser
+	 */
+	public JLabel getLblLbluser() {
+		return lblLbluser;
+	}
+
+	/**
+	 * @param lblLbluser the lblLbluser to set
+	 */
+	public void setLblLbluser(JLabel lblLbluser) {
+		this.lblLbluser = lblLbluser;
+	}
 
 	/**
 	 * @return the comboBox
@@ -150,5 +165,12 @@ public class HomeView extends BaseView {
 		gbc_list.gridx = 0;
 		gbc_list.gridy = 4;
 		panel.add(userList, gbc_list);
+
+		lblLbluser = new JLabel("");
+		GridBagConstraints gbc_lblLbluser = new GridBagConstraints();
+		gbc_lblLbluser.insets = new Insets(0, 0, 0, 5);
+		gbc_lblLbluser.gridx = 1;
+		gbc_lblLbluser.gridy = 4;
+		panel.add(lblLbluser, gbc_lblLbluser);
 	}
 }

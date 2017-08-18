@@ -48,5 +48,8 @@ public class Candidate extends User {
 
 	public Candidate() {
 		super(Role.CANDIDATE);
+		this.companies = new ArrayList<Company>();
+		this.jobs = new ArrayList<Job>();
+		this.skills = new ArrayList<Skill>();
 	}
 }

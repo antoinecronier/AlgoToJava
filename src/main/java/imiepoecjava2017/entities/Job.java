@@ -51,4 +51,9 @@ public class Job {
 		this.skills = skills;
 	}
 
+	public Job() {
+		super();
+		this.skills = new ArrayList<Skill>();
+		this.candidates = new ArrayList<Candidate>();
+	}
 }
