@@ -49,4 +49,30 @@ public abstract class BaseController implements IBaseController {
 	@Override
 	public void setupDatas() {
 	}
+
+	/* (non-Javadoc)
+	 * @see imiepoecjava2017.controllers.IBaseController#initEvent()
+	 */
+	@Override
+	public void initEvent() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see imiepoecjava2017.controllers.IBaseController#onExit()
+	 */
+	@Override
+	public void onExit() {
+
+	}
+
+	/* (non-Javadoc)
+	 * @see imiepoecjava2017.controllers.IBaseController#onEnter()
+	 */
+	@Override
+	public void onEnter() {
+		// TODO Auto-generated method stub
+
+	}
 }

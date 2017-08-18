@@ -33,7 +33,7 @@ public class HomeView extends BaseView {
 	 * Create the frame.
 	 */
 	public HomeView(JFrame frame) {
-		super.pageName = "Home";
+		super.pageName = ViewsTerms.HOMEVIEW_PAGE_NAME;
 		JPanel panel = new JPanel();
 		super.contentPane = panel;
 

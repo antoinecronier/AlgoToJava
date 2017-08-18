@@ -14,6 +14,7 @@ import imiepoecjava2017.views.LoginView;
 public class LoginController extends BaseController {
 
 	private User user;
+	private ActionListener btnValidateAction;
 
 	public LoginController(JFrame frame) {
 		super.frame = frame;
@@ -25,7 +26,8 @@ public class LoginController extends BaseController {
 	public void initEvent() {
 
 		LoginView view = (LoginView) super.view;
-		view.getBtnValidate().addActionListener(new ActionListener() {
+
+		btnValidateAction = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -40,11 +42,22 @@ public class LoginController extends BaseController {
 					ViewsManager.getInstance().next(new HomeController(frame));
 				}
 			}
-		});
+		};
+		view.getBtnValidate().addActionListener(btnValidateAction);
 	}
 
 	@Override
 	public void setupDatas() {
-		this.viewDatas.put("currentUser", user);
+		this.viewDatas.put(ViewsDatasTerms.CURRENT_USER, user);
 	}
+
+	/* (non-Javadoc)
+	 * @see imiepoecjava2017.controllers.BaseController#onExit()
+	 */
+	@Override
+	public void onExit() {
+		((LoginView) view).getBtnValidate().removeActionListener(btnValidateAction);
+	}
+
+
 }

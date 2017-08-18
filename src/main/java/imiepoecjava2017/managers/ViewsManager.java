@@ -3,8 +3,6 @@ package imiepoecjava2017.managers;
 import imiepoecjava2017.controllers.BaseController;
 import imiepoecjava2017.controllers.LoginController;
 import imiepoecjava2017.utils.views.ViewUtils;
-import imiepoecjava2017.views.LoginView;
-
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +30,17 @@ public class ViewsManager {
 	private List<BaseController> controllers;
 	private int currentControllerIndex;
 	private BaseController currentController;
+	private Boolean haveBack = false;
 
-	public void start(){
+	public void start() {
 		ViewUtils.configureFirstJFrame(frame);
 		currentController = new LoginController(frame);
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					controllers.get(currentControllerIndex).loadController(frame);
+					controllers.get(currentControllerIndex).loadController(
+							frame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,20 +55,84 @@ public class ViewsManager {
 	}
 
 	public ViewsManager next(BaseController controller) {
-		controller.setViewDatas(controllers.get(currentControllerIndex).getViewDatas());
+		System.out.println("go next to " + controller.getView().getPageName());
+
+		if (haveBack) {
+			haveBack = false;
+			for (int i = currentControllerIndex + 1; i < controllers.size(); i++) {
+				controllers.remove(i);
+			}
+		}
+		currentController.onExit();
+
+		controller.setViewDatas(controllers.get(currentControllerIndex)
+				.getViewDatas());
 		currentController = controller;
 		this.controllers.add(currentController);
 		currentControllerIndex++;
+		executeIntoUI();
+		return this;
+	}
+
+	public ViewsManager next() {
+		if (canNext()) {
+			System.out.println("go next to " + controllers.get(currentControllerIndex + 1).getView().getPageName());
+
+			controllers.get(currentControllerIndex + 1).setViewDatas(
+					controllers.get(currentControllerIndex).getViewDatas());
+			currentController.onExit();
+			currentController = controllers.get(currentControllerIndex + 1);
+			currentControllerIndex++;
+			executeIntoUI();
+		}
+		return this;
+	}
+
+	public ViewsManager back() {
+		if (canBack()) {
+			System.out.println("go back to " + controllers.get(currentControllerIndex - 1).getView().getPageName());
+
+			haveBack = true;
+			controllers.get(currentControllerIndex - 1).setViewDatas(
+					controllers.get(currentControllerIndex).getViewDatas());
+			currentController.onExit();
+			currentController = controllers.get(currentControllerIndex - 1);
+			currentControllerIndex--;
+			executeIntoUI();
+		}
+		return this;
+	}
+
+	public Boolean canBack() {
+		if (controllers.size() - 1 >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Boolean canNext() {
+		if (controllers.size() < currentControllerIndex + 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *
+	 */
+	public void executeIntoUI() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					controllers.get(currentControllerIndex).loadController(frame);
+					controllers.get(currentControllerIndex).loadController(
+							frame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		return this;
 	}
 }

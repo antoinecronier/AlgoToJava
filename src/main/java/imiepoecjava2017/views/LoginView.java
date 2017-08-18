@@ -122,7 +122,7 @@ public class LoginView extends BaseView {
 	 * Create the frame.
 	 */
 	public LoginView(JFrame frame) {
-		super.pageName = "Login";
+		super.pageName = ViewsTerms.LOGINVIEW_PAGE_NAME;
 		super.contentPane = new JPanel();
 
 		gridBagLayout = new GridBagLayout();
@@ -132,14 +132,14 @@ public class LoginView extends BaseView {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 
-		lblLoginPage = new JLabel("Login Page");
+		lblLoginPage = new JLabel(ViewsTerms.LOGINVIEW_LBL_LOGINPAGE);
 		GridBagConstraints gbc_lblLoginPage = new GridBagConstraints();
 		gbc_lblLoginPage.insets = new Insets(0, 0, 5, 0);
 		gbc_lblLoginPage.gridx = 5;
 		gbc_lblLoginPage.gridy = 2;
 		getContentPane().add(lblLoginPage, gbc_lblLoginPage);
 
-		lblLogin = new JLabel("Login");
+		lblLogin = new JLabel(ViewsTerms.LOGINVIEW_LBL_LOGIN);
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
 		gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLogin.gridx = 3;
@@ -155,7 +155,7 @@ public class LoginView extends BaseView {
 		getContentPane().add(loginTextField, gbc_textField);
 		loginTextField.setColumns(10);
 
-		lblPassword = new JLabel("Password");
+		lblPassword = new JLabel(ViewsTerms.LOGINVIEW_LBL_PASSWORD);
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 3;
@@ -170,7 +170,7 @@ public class LoginView extends BaseView {
 		gbc_passwordField.gridy = 6;
 		getContentPane().add(passwordField, gbc_passwordField);
 
-		btnValidate = new JButton("Validate");
+		btnValidate = new JButton(ViewsTerms.LOGINVIEW_BTN_VALIDATE);
 		GridBagConstraints gbc_btnValidate = new GridBagConstraints();
 		gbc_btnValidate.gridx = 5;
 		gbc_btnValidate.gridy = 8;

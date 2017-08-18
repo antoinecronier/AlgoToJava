@@ -7,4 +7,6 @@ public interface IBaseController {
 	public void initEvent();
 	public void initView();
 	public void setupDatas();
+	public void onExit();
+	public void onEnter();
 }
