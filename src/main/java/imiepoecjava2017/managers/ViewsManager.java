@@ -3,6 +3,7 @@ package imiepoecjava2017.managers;
 import imiepoecjava2017.controllers.BaseController;
 import imiepoecjava2017.controllers.LoginController;
 import imiepoecjava2017.utils.views.ViewUtils;
+import imiepoecjava2017.views.LoginView;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -34,19 +35,18 @@ public class ViewsManager {
 
 	public void start(){
 		ViewUtils.configureFirstJFrame(frame);
+		currentController = new LoginController(frame);
+		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					controllers.get(currentControllerIndex).loadController(frame);
 					frame.setVisible(true);
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
-		controllers.add(new LoginController(frame));
-		controllers.get(currentControllerIndex).loadController(frame);
 	}
 
 	public ViewsManager add(BaseController controller) {
@@ -55,9 +55,20 @@ public class ViewsManager {
 	}
 
 	public ViewsManager next(BaseController controller) {
+		controller.setViewDatas(controllers.get(currentControllerIndex).getViewDatas());
 		currentController = controller;
 		this.controllers.add(currentController);
 		currentControllerIndex++;
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					controllers.get(currentControllerIndex).loadController(frame);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		return this;
 	}
 }

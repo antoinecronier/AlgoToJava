@@ -19,7 +19,6 @@ public class ViewUtils {
 	 */
 	public static void configureJFrame(JFrame jFrame, JPanel contentPane) {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		jFrame.setContentPane(contentPane);
 	}
 

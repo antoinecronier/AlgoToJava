@@ -122,6 +122,7 @@ public class LoginView extends BaseView {
 	 * Create the frame.
 	 */
 	public LoginView(JFrame frame) {
+		super.pageName = "Login";
 		super.contentPane = new JPanel();
 
 		gridBagLayout = new GridBagLayout();

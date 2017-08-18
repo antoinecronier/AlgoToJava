@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import imiepoecjava2017.entities.Candidate;
 import imiepoecjava2017.entities.User;
+import imiepoecjava2017.managers.ViewsManager;
 import imiepoecjava2017.views.LoginView;
 
 public class LoginController extends BaseController {
@@ -34,9 +35,16 @@ public class LoginController extends BaseController {
 
 				if (user.getLogin().equals("toto")
 						&& user.getPassword().equals("pwd")) {
-					new HomeController(LoginController.this.frame);
+					user.setFirstname("toto");
+					user.setLastname("el");
+					ViewsManager.getInstance().next(new HomeController(frame));
 				}
 			}
 		});
+	}
+
+	@Override
+	public void setupDatas() {
+		this.viewDatas.put("currentUser", user);
 	}
 }
