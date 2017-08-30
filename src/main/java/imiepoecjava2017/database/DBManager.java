@@ -4,6 +4,9 @@ import imiepoecjava2017.utils.file.FileManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 public class DBManager {
@@ -11,7 +14,10 @@ public class DBManager {
 	private static DBManager instance = null;
 
 	protected DBManager() {
-		connect();
+		connectCrea();
+		if (canConnect()) {
+			connect();
+		}
 	}
 
 	public static DBManager getInstance() {
@@ -29,8 +35,16 @@ public class DBManager {
 	private static final String DBCONFIG = "dbconfig";
 	private static final String CONFIG = "config";
 
+	private Connection creaCon;
 	private Connection con;
 	private String dbName = "mydb";
+
+	/**
+	 * @return the creaCon
+	 */
+	public Connection getCreaCon() {
+		return creaCon;
+	}
 
 	/**
 	 * @return the dBNAME
@@ -44,6 +58,22 @@ public class DBManager {
 	 */
 	public Connection getCon() {
 		return con;
+	}
+
+	private boolean canConnect() {
+		try {
+			Statement stmt = creaCon.createStatement();
+			ResultSet rs = stmt.executeQuery("SHOW DATABASES;");
+			while (rs.next()) {
+				if (rs.getString(1).equals(dbName)) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void connect() {
@@ -75,6 +105,40 @@ public class DBManager {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://" + serverAddress
 					+ ":" + port + "/" + dbName, login, password);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	public void connectCrea() {
+		connectCrea(CONFIG,DBCONFIG);
+	}
+
+	public void connectCrea(String path, String file) {
+		FileManager fileManager = new FileManager(path, file);
+		Map<String, Object> datas = fileManager.extractFromPattern();
+
+		String password = "";
+		if (datas.containsKey(PASSWORD)) {
+			password = datas.get(PASSWORD).toString();
+		}
+
+		dbName = datas.get(DB_NAME).toString();
+
+		connectCrea(
+				datas.get(SERVER_ADDRESS).toString(),
+				datas.get(PORT).toString(),
+				datas.get(LOGIN).toString(),
+				password
+				);
+	}
+
+	public void connectCrea(String serverAddress, String port,
+			String login, String password) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			creaCon = DriverManager.getConnection("jdbc:mysql://" + serverAddress
+					+ ":" + port + "/", login, password);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
