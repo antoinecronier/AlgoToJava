@@ -1,8 +1,8 @@
 package imiepoecjava2017.entities;
 
-import imiepoecjava2017.entities.base.DBItem;
+import imiepoecjava2017.entities.base.BaseEntity;
 
-public abstract class User extends DBItem {
+public abstract class User extends BaseEntity {
 
 	private String lastname;
 	private String firstname;

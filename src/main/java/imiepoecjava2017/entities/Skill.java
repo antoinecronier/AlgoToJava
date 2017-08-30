@@ -1,13 +1,13 @@
 package imiepoecjava2017.entities;
 
-import imiepoecjava2017.entities.base.DBItem;
+import imiepoecjava2017.entities.base.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table( name = "Skill" )
-public class Skill extends DBItem {
+public class Skill extends BaseEntity {
 	private String name;
 	private int level;
 

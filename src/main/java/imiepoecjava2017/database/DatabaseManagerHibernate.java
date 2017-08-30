@@ -1,6 +1,6 @@
 package imiepoecjava2017.database;
 
-import imiepoecjava2017.entities.base.DBItem;
+import imiepoecjava2017.entities.base.BaseEntity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -62,7 +62,7 @@ public class DatabaseManagerHibernate {
 	    entityManager = factory.createEntityManager();
 	}
 
-	public double insert(DBItem item){
+	public double insert(BaseEntity item){
 		session = factory.openSession();
 		session.beginTransaction();
 		entityManager.persist(item);

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-public class DBItem {
+public abstract class BaseEntity {
 	private double id;
 
 	/**
