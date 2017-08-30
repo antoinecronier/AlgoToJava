@@ -35,3 +35,6 @@ proguard/
 .gradle/
 build/
 bin/
+
+#IMIE-POEC-2017
+config/dbconfig
