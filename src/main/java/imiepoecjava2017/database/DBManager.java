@@ -17,6 +17,8 @@ public class DBManager {
 		connectCrea();
 		if (canConnect()) {
 			connect();
+		}else{
+			createDB("config","dbsql");
 		}
 	}
 
@@ -74,6 +76,38 @@ public class DBManager {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	private void createDB(String path, String file) {
+
+		Statement stmt;
+		try {
+			stmt = creaCon.createStatement();
+			stmt.execute("CREATE DATABASE IF NOT EXISTS "
+					+ dbName + ";");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		connect();
+
+		FileManager fileManager = new FileManager(path, file);
+		String creationRequest = "";
+		for (String string : fileManager.loadFromFile()) {
+			creationRequest += string+"\n";
+		}
+
+		try {
+			stmt = con.createStatement();
+			for (String iterable_element : creationRequest.split(";")) {
+				if (!iterable_element.equals("") && !iterable_element.equals("\n")) {
+					stmt.execute(iterable_element);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void connect() {

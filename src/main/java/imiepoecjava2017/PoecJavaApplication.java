@@ -13,9 +13,9 @@ public class PoecJavaApplication {
 
 	public static void main(String[] args) {
 		SkillDAO dao = new SkillDAO();
-		ResultSet set = dao.executeRequest("CREATE DATABASE IF NOT EXISTS "
-				+ DBManager.getInstance().getDBNAME() + ";");
-		//ResultSet set = dao.executeRequest("SHOW TABLES;");
+//		ResultSet set = dao.executeRequest("CREATE DATABASE IF NOT EXISTS "
+//				+ DBManager.getInstance().getDBNAME() + ";");
+		ResultSet set = dao.executeRequest("SHOW TABLES;");
 		try {
 			while (set.next()) {
 				System.out.println(set.getString(1));

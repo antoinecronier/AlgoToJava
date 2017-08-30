@@ -1,0 +1,138 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+CREATE DATABASE IF NOT EXISTS imiepoec2017;
+USE imiepoec2017y;
+
+#------------------------------------------------------------
+# Table: Skill
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Skill(
+        id    int (11) Auto_increment  NOT NULL ,
+        name  Varchar (25) ,
+        level Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Job
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Job(
+        id         int (11) Auto_increment  NOT NULL ,
+        name       Varchar (25) ,
+        id_Company Int ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Candidate
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Candidate(
+        id        int (11) Auto_increment  NOT NULL ,
+        lastname  Varchar (25) ,
+        firstname Varchar (25) ,
+        login     Varchar (25) ,
+        password  Varchar (25) ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Administrator
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Administrator(
+        id        int (11) Auto_increment  NOT NULL ,
+        lastname  Varchar (25) ,
+        firstname Varchar (25) ,
+        login     Varchar (25) ,
+        password  Varchar (25) ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Company
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS Company(
+        id        int (11) Auto_increment  NOT NULL ,
+        lastname  Varchar (25) ,
+        firstname Varchar (25) ,
+        login     Varchar (25) ,
+        password  Varchar (25) ,
+        PRIMARY KEY (id )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: CandidateJob
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CandidateJob(
+        id_Candidate  Int NOT NULL ,
+        id_Job        Int NOT NULL ,
+        PRIMARY KEY (id_Candidate ,id_Job )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: CandidateCompany
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CandidateCompany(
+        id_Candidate Int NOT NULL ,
+        id_Company   Int NOT NULL ,
+        PRIMARY KEY (id_Candidate ,id_Company )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: CandidateSkill
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CandidateSkill(
+        id_Candidate  Int NOT NULL ,
+        id_Skill      Int NOT NULL ,
+        PRIMARY KEY (id_Candidate ,id_Skill )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: JobSkill
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS JobSkill(
+        id_Skill Int NOT NULL ,
+        id_Job   Int NOT NULL ,
+        PRIMARY KEY (id_Skill ,id_Job )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: CompanyCandidate
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CompanyCandidate(
+        id_Company   Int NOT NULL ,
+        id_Candidate Int NOT NULL ,
+        PRIMARY KEY (id_Company ,id_Candidate )
+)ENGINE=InnoDB;
+
+ALTER TABLE Job ADD CONSTRAINT FK_Job_id_Company FOREIGN KEY (id_Company) REFERENCES Company(id);
+ALTER TABLE CandidateJob ADD CONSTRAINT FK_CandidateJob_id_Candidate FOREIGN KEY (id_Candidate) REFERENCES Candidate(id);
+ALTER TABLE CandidateJob ADD CONSTRAINT FK_CandidateJob_id_Job FOREIGN KEY (id_Job) REFERENCES Job(id);
+ALTER TABLE CandidateCompany ADD CONSTRAINT FK_CandidateCompany_id_Candidate FOREIGN KEY (id_Candidate) REFERENCES Candidate(id);
+ALTER TABLE CandidateCompany ADD CONSTRAINT FK_CandidateCompany_id_Company FOREIGN KEY (id_Company) REFERENCES Company(id);
+ALTER TABLE CandidateSkill ADD CONSTRAINT FK_CandidateSkill_id_Candidate FOREIGN KEY (id_Candidate) REFERENCES Candidate(id);
+ALTER TABLE CandidateSkill ADD CONSTRAINT FK_CandidateSkill_id_Skill FOREIGN KEY (id_Skill) REFERENCES Skill(id);
+ALTER TABLE JobSkill ADD CONSTRAINT FK_JobSkill_id_Skill FOREIGN KEY (id_Skill) REFERENCES Skill(id);
+ALTER TABLE JobSkill ADD CONSTRAINT FK_JobSkill_id_Job FOREIGN KEY (id_Job) REFERENCES Job(id);
+ALTER TABLE CompanyCandidate ADD CONSTRAINT FK_CompanyCandidate_id_Company FOREIGN KEY (id_Company) REFERENCES Company(id);
+ALTER TABLE CompanyCandidate ADD CONSTRAINT FK_CompanyCandidate_id_Candidate FOREIGN KEY (id_Candidate) REFERENCES Candidate(id);

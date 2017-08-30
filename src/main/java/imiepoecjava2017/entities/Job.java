@@ -12,9 +12,24 @@ import javax.persistence.Table;
 @Table( name = "Job" )
 public class Job extends BaseEntity {
 
+	private String name;
 	private Company company;
 	private List<Candidate> candidates = new ArrayList<Candidate>();
 	private List<Skill> skills = new ArrayList<Skill>();
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * @return the company
