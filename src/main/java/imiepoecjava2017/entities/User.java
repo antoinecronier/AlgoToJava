@@ -1,27 +1,15 @@
 package imiepoecjava2017.entities;
 
-import java.util.ArrayList;
+import imiepoecjava2017.entities.base.DBItem;
 
-public abstract class User {
-	private int id;
+public abstract class User extends DBItem {
+
 	private String lastname;
 	private String firstname;
 	private String login;
 	private String password;
 	private Role role;
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
 	/**
 	 * @return the lastname
 	 */

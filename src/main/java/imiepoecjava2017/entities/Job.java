@@ -1,9 +1,16 @@
 package imiepoecjava2017.entities;
 
+import imiepoecjava2017.entities.base.DBItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Job {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table( name = "Job" )
+public class Job extends DBItem {
 
 	private Company company;
 	private List<Candidate> candidates = new ArrayList<Candidate>();

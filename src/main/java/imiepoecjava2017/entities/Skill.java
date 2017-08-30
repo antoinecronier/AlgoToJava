@@ -1,23 +1,16 @@
 package imiepoecjava2017.entities;
 
-public class Skill {
+import imiepoecjava2017.entities.base.DBItem;
 
-	private int id;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table( name = "Skill" )
+public class Skill extends DBItem {
 	private String name;
 	private int level;
 
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
 	/**
 	 * @return the name
 	 */

@@ -3,6 +3,11 @@ package imiepoecjava2017.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table( name = "Candidate" )
 public class Candidate extends User {
 
 	private List<Job> jobs = new ArrayList<Job>();

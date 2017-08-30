@@ -24,6 +24,7 @@ dependencies {
     //compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile 'mysql:mysql-connector-java:5.1.37'
     compile 'com.github.javafaker:javafaker:0.2'
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
@@ -174,7 +175,7 @@ findbugsMain.finalizedBy checkFindBugsReport
 task findbugsMain (type: FindBugs, overwrite: true) {
 	ignoreFailures = true
     description 'Run findbugs'
-    classes = fileTree(classesJava) 
+    classes = fileTree(classesJava)
     source = fileTree(javasRoot)
     classpath = files(classesJava)
 
@@ -191,7 +192,7 @@ task findbugsMain (type: FindBugs, overwrite: true) {
 task findbugsTest (type: FindBugs, overwrite: true) {
 	ignoreFailures = true
     description 'Run findbugs'
-    classes = fileTree(classesJava) 
+    classes = fileTree(classesJava)
     source = fileTree(javasRoot)
     classpath = files(classesJava)
 
@@ -226,7 +227,7 @@ task pmdMain(type: Pmd, overwrite: true) {
     description 'Runs PMD inspection against Android sourcesets.'
     group = 'Code Quality'
     ruleSetFiles = files("${rootProject.rootDir}/pmd_rules.xml")
-    source = fileTree(javasRoot) 
+    source = fileTree(javasRoot)
     include '**/*.java'
     exclude '**/gen/**'
 
@@ -241,7 +242,7 @@ task pmdTest(type: Pmd, overwrite: true) {
     description 'Runs PMD inspection against Android sourcesets.'
     group = 'Code Quality'
     ruleSetFiles = files("${rootProject.rootDir}/pmd_rules.xml")
-    source = fileTree(testJavaRoot) 
+    source = fileTree(testJavaRoot)
     include '**/*.java'
     exclude '**/gen/**'
 
