@@ -17,8 +17,8 @@ public class DBManager {
 		connectCrea();
 		if (canConnect()) {
 			connect();
-		}else{
-			createDB("config","dbsql");
+		} else {
+			createDB("config", "dbsql");
 		}
 	}
 
@@ -83,8 +83,7 @@ public class DBManager {
 		Statement stmt;
 		try {
 			stmt = creaCon.createStatement();
-			stmt.execute("CREATE DATABASE IF NOT EXISTS "
-					+ dbName + ";");
+			stmt.execute("CREATE DATABASE IF NOT EXISTS " + dbName + ";");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -94,13 +93,14 @@ public class DBManager {
 		FileManager fileManager = new FileManager(path, file);
 		String creationRequest = "";
 		for (String string : fileManager.loadFromFile()) {
-			creationRequest += string+"\n";
+			creationRequest += string + "\n";
 		}
 
 		try {
 			stmt = con.createStatement();
 			for (String iterable_element : creationRequest.split(";")) {
-				if (!iterable_element.equals("") && !iterable_element.equals("\n")) {
+				if (!iterable_element.equals("")
+						&& !iterable_element.equals("\n")) {
 					stmt.execute(iterable_element);
 				}
 			}
@@ -111,7 +111,7 @@ public class DBManager {
 	}
 
 	public void connect() {
-		connect(CONFIG,DBCONFIG);
+		connect(CONFIG, DBCONFIG);
 	}
 
 	public void connect(String path, String file) {
@@ -123,13 +123,9 @@ public class DBManager {
 			password = datas.get(PASSWORD).toString();
 		}
 
-		connect(
-				datas.get(SERVER_ADDRESS).toString(),
-				datas.get(PORT).toString(),
-				datas.get(DB_NAME).toString(),
-				datas.get(LOGIN).toString(),
-				password
-				);
+		connect(datas.get(SERVER_ADDRESS).toString(), datas.get(PORT)
+				.toString(), datas.get(DB_NAME).toString(), datas.get(LOGIN)
+				.toString(), password);
 	}
 
 	public void connect(String serverAddress, String port, String dbName,
@@ -145,7 +141,7 @@ public class DBManager {
 	}
 
 	public void connectCrea() {
-		connectCrea(CONFIG,DBCONFIG);
+		connectCrea(CONFIG, DBCONFIG);
 	}
 
 	public void connectCrea(String path, String file) {
@@ -159,20 +155,16 @@ public class DBManager {
 
 		dbName = datas.get(DB_NAME).toString();
 
-		connectCrea(
-				datas.get(SERVER_ADDRESS).toString(),
-				datas.get(PORT).toString(),
-				datas.get(LOGIN).toString(),
-				password
-				);
+		connectCrea(datas.get(SERVER_ADDRESS).toString(), datas.get(PORT)
+				.toString(), datas.get(LOGIN).toString(), password);
 	}
 
-	public void connectCrea(String serverAddress, String port,
-			String login, String password) {
+	public void connectCrea(String serverAddress, String port, String login,
+			String password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			creaCon = DriverManager.getConnection("jdbc:mysql://" + serverAddress
-					+ ":" + port + "/", login, password);
+			creaCon = DriverManager.getConnection("jdbc:mysql://"
+					+ serverAddress + ":" + port + "/", login, password);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
