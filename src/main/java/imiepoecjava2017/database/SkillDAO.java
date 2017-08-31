@@ -5,7 +5,6 @@ import imiepoecjava2017.entities.base.BaseEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class SkillDAO extends BaseDAO {
 

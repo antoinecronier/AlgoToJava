@@ -90,8 +90,8 @@ public abstract class BaseDAO implements IDAOBase {
 				item.setId(rs.getInt(1));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			item = null;
 		}
 
 		return item;
@@ -182,7 +182,6 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public int update(BaseEntity item) {
-		executeUpdate("UPDATE " + table + " SET " + parseUpdate(item) + " WHERE " + id + " = " + item.getId());
-		return 0;
+		return executeUpdate("UPDATE " + table + " SET " + parseUpdate(item) + " WHERE " + id + " = " + item.getId());
 	}
 }
