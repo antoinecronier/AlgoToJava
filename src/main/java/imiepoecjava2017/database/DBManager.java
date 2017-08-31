@@ -110,6 +110,21 @@ public class DBManager {
 		}
 	}
 
+	public void deleteDB(){
+		Statement stmt;
+		try {
+			stmt = creaCon.createStatement();
+			stmt.execute("DROP DATABASE " + dbName + ";");
+			con.close();
+			con = null;
+			creaCon.close();
+			creaCon = null;
+			instance = null;
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
 	public void connect() {
 		connect(CONFIG, DBCONFIG);
 	}
