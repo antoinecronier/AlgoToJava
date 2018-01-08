@@ -50,21 +50,22 @@ public class PoecJavaApplication {
 			@Override
 			public void fightSuccessMessage(LivingCharacter attack,
 					LivingCharacter ennemi) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void fightLoseMessage(LivingCharacter attack,
 					LivingCharacter ennemi) {
-				// TODO Auto-generated method stub
-
 			}
 		}));
 
 		heros.add(new Paladin("h1", 5, 15, arme1, armure3));
 		heros.add(new Barbarian("h2", 5, 15, arme1, arme3, armure1));
 		heros.add(new Mage("h3", 5, 15, arme2, armure2));
+
+//		Weapon arme4 = new Weapon("arme3", 500000, 1, ItemType.PHYSIC);
+//		Armor armure4 = new Armor("armure3", 500, ItemType.MIXTE);
+//
+//		heros.add(new Paladin("jean paul",50000,200,arme4,armure4));
 
 		Donjon donjon = new Donjon(heros, monsters);
 		donjon.doTheDonjon();
