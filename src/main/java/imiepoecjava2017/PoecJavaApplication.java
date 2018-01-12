@@ -30,8 +30,8 @@ public class PoecJavaApplication {
 		Weapon arme3 = new Weapon("arme3", 5, 2, ItemType.PHYSIC);
 		Armor armure3 = new Armor("armure3", 7, ItemType.MIXTE);
 
-		ArrayList<Monster> monsters = new ArrayList<Monster>();
-		ArrayList<Hero> heros = new ArrayList<Hero>();
+		ArrayList<LivingCharacter> monsters = new ArrayList<LivingCharacter>();
+		ArrayList<LivingCharacter> heros = new ArrayList<LivingCharacter>();
 		ArrayList<Item> loots = new ArrayList<Item>();
 		loots.add(new Weapon("arme1", 5, 2, ItemType.PHYSIC));
 

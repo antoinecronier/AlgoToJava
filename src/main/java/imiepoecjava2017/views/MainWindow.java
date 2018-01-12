@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -38,6 +40,8 @@ public class MainWindow {
 	private JComboBox<Armor> ArmureComboBox;
 	private JButton btnAjouter;
 	private JList<LivingCharacter> jlistHeros;
+	private JList<LivingCharacter> jlistMonstre;
+	private JButton btnCombat;
 
 	/**
 	 * @return the frame
@@ -250,6 +254,34 @@ public class MainWindow {
 	}
 
 	/**
+	 * @return the jlistMonstre
+	 */
+	public JList<LivingCharacter> getJlistMonstre() {
+		return jlistMonstre;
+	}
+
+	/**
+	 * @param jlistMonstre the jlistMonstre to set
+	 */
+	public void setJlistMonstre(JList<LivingCharacter> jlistMonstre) {
+		this.jlistMonstre = jlistMonstre;
+	}
+
+	/**
+	 * @return the btnCombat
+	 */
+	public JButton getBtnCombat() {
+		return btnCombat;
+	}
+
+	/**
+	 * @param btnCombat the btnCombat to set
+	 */
+	public void setBtnCombat(JButton btnCombat) {
+		this.btnCombat = btnCombat;
+	}
+
+	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -281,9 +313,9 @@ public class MainWindow {
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE, 1.0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE, 1.0, 1.0};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 
@@ -392,6 +424,12 @@ public class MainWindow {
 		gbc_btnAjouter.gridy = 6;
 		frame.getContentPane().add(btnAjouter, gbc_btnAjouter);
 
+		btnCombat = new JButton("Combat");
+		GridBagConstraints gbc_btnCombat = new GridBagConstraints();
+		gbc_btnCombat.gridx = 1;
+		gbc_btnCombat.gridy = 7;
+		frame.getContentPane().add(btnCombat, gbc_btnCombat);
+
 		jlistHeros = new JList<LivingCharacter>();
 		GridBagConstraints gbc_jlistHeros = new GridBagConstraints();
 		gbc_jlistHeros.fill = GridBagConstraints.HORIZONTAL;
@@ -399,6 +437,45 @@ public class MainWindow {
 		gbc_jlistHeros.gridx = 2;
 		gbc_jlistHeros.gridy = 0;
 		frame.getContentPane().add(jlistHeros, gbc_jlistHeros);
+
+		jlistMonstre = new JList<LivingCharacter>();
+		GridBagConstraints gbc_jlistMonstre = new GridBagConstraints();
+		gbc_jlistMonstre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jlistMonstre.gridheight = 6;
+		gbc_jlistMonstre.gridx = 3;
+		gbc_jlistMonstre.gridy = 0;
+		frame.getContentPane().add(jlistMonstre, gbc_jlistMonstre);
 	}
 
+	public void SetJListHeros(List<LivingCharacter> heros){
+		frame.getContentPane().remove(jlistHeros);
+		DefaultListModel<LivingCharacter> model = new DefaultListModel<LivingCharacter>();
+		for (LivingCharacter livingCharacter : heros) {
+			model.addElement(livingCharacter);
+		}
+		jlistHeros = new JList<LivingCharacter>();
+		jlistHeros.setModel(model);
+		GridBagConstraints gbc_jlistHero = new GridBagConstraints();
+		gbc_jlistHero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jlistHero.gridheight = 6;
+		gbc_jlistHero.gridx = 2;
+		gbc_jlistHero.gridy = 0;
+		frame.getContentPane().add(jlistHeros, gbc_jlistHero);
+	}
+
+	public void SetJListMonstres(List<LivingCharacter> monstres){
+		frame.getContentPane().remove(jlistMonstre);
+		DefaultListModel<LivingCharacter> model = new DefaultListModel<LivingCharacter>();
+		for (LivingCharacter livingCharacter : monstres) {
+			model.addElement(livingCharacter);
+		}
+		jlistMonstre = new JList<LivingCharacter>();
+		jlistMonstre.setModel(model);
+		GridBagConstraints gbc_jlistMonstre = new GridBagConstraints();
+		gbc_jlistMonstre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jlistMonstre.gridheight = 6;
+		gbc_jlistMonstre.gridx = 3;
+		gbc_jlistMonstre.gridy = 0;
+		frame.getContentPane().add(jlistMonstre, gbc_jlistMonstre);
+	}
 }

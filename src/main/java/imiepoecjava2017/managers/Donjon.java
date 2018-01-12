@@ -8,13 +8,19 @@ import java.util.ArrayList;
 
 public class Donjon {
 
-	private ArrayList<Hero> heros;
-	private ArrayList<Monster> monsters;
+	private ArrayList<Hero> heros = new ArrayList<Hero>();
+	private ArrayList<Monster> monsters = new ArrayList<Monster>();
 
-	public Donjon(ArrayList<Hero> heros, ArrayList<Monster> monsters) {
+	public Donjon(ArrayList<LivingCharacter> heros, ArrayList<LivingCharacter> monsters) {
 		super();
-		this.heros = heros;
-		this.monsters = monsters;
+		for (LivingCharacter livingCharacter : heros) {
+			Hero h = (Hero)livingCharacter;
+			this.heros.add(h);
+		}
+		for (LivingCharacter livingCharacter : monsters) {
+			Monster m = (Monster)livingCharacter;
+			this.monsters.add(m);
+		}
 	}
 
 	public void doTheDonjon() {
